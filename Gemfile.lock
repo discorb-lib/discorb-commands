@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     discorb-commands (0.1.0)
-      discorb (~> 0.5.4)
+      discorb (~> 0.6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -28,7 +28,7 @@ GEM
       protocol-websocket (~> 0.7.0)
     console (1.13.1)
       fiber-local
-    discorb (0.5.6)
+    discorb (0.6.0)
       async (~> 1.30.1)
       async-http (~> 0.56.5)
       async-websocket (~> 0.19.0)
