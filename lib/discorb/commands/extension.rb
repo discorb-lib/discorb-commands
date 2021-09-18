@@ -30,6 +30,9 @@ module Discorb::Commands
     def self.extended(base)
       base.commands = {}
       base.prefix = nil
+      base.on :command_not_found do |message, name|
+        message.reply("Command not found: #{name}")
+      end
     end
   end
 end
