@@ -11,11 +11,12 @@ module Discorb::Commands
     end
 
     event :message do |message|
-      real_prefix = @client.prefix.is_a?(Proc) ? @client.prefix.call(message) : @client.prefix
-      real_prefix = [real_prefix] unless real_prefix.is_a?(Array)
-      if message.content.start_with?(*real_prefix)
-        Discorb::Commands::Core.handle_command(@client, message, message.content.delete_prefix(*real_prefix))
-      end
+      real_prefixes = @client.prefix.is_a?(Proc) ? @client.prefix.call(message) : @client.prefix
+      real_prefixes = [real_prefixes] unless real_prefixes.is_a?(Array)
+      prefix = prefixes.find { |prefix| message.start_with?(prefix) }
+      return unless prefix  # If it wasn't command
+
+      Discorb::Commands::Context.new(client, message, prefix).handle
     end
 
     def command(name, options = {}, &block)
